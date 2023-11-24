@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".MisMedicamentosActivity">
+
+    <EditText
+        android:id="@+id/medicationNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre del Medicamento"
+        android:layout_marginBottom="16dp" />
+
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/addMedicationButton"
+        android:layout_width="391dp"
+        android:layout_height="45dp"
+        android:text="Agregar Medicamento y Notificación"
+        android:background="@color/colorVerdeTurquesa"/>
+
+    <!-- Agrega el RecyclerView para mostrar la lista de medicamentos -->
+
+    <Button
+        android:id="@+id/verListaButton"
+        android:layout_marginTop="10dp"
+        android:layout_width="393dp"
+        android:layout_height="wrap_content"
+        android:onClick="verListaMedicamentos"
+        android:text="Ver Lista de Medicamentos"
+        android:background="@color/colorVerdeTurquesa"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/medicamentoRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom" /> <!-- Esto posicionará el RecyclerView en la parte inferior -->
+
+
+</LinearLayout>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_medicalspeed"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_medicalspeed_round"
+        android:supportsRtl="true"
+        android:theme="@style/Base.Theme.IntegradoraD."
+        tools:targetApi="31">
+
+        <!-- Agrega la clave de la API de Google Maps aquí -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyC7Ros7-Prx60PNtkwHrLFIoDGwfr-2ncs" />
+
+        <receiver android:name=".NotificationReceiver" />
+
+        <activity
+            android:name=".ListarNotas.ListarNotas"
+            android:exported="false"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".TerminosCondicionesActivity"
+            android:exported="false"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".ListaPersonasActivity"
+            android:exported="false"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".RegistrarCitaActivity"
+            android:exported="false"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".MisMedicamentosActivity"
+            android:exported="false"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".MisRecetasActivity"
+            android:exported="false"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".MiMedico"
+            android:exported="false"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="locked"
+            android:theme="@style/Theme.Main" />
+        <activity
+            android:name=".AccountRecoveryActivity"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".CheckEmailActivity"
+            android:screenOrientation="locked" />
+        <activity
+            android:name=".SignUpActivity"
+            android:screenOrientation="locked" />
+        <activity android:name=".NotificationActivity" />
+        <activity android:name=".ListaMedicamentosActivity" />
+        <activity
+            android:name=".SplashScreenActivity"
+            android:exported="true"
+            android:screenOrientation="locked">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SignInActivity"
+            android:exported="false"
+            android:screenOrientation="locked"/>
+    </application>
+
+</manifest>
