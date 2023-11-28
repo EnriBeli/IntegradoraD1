@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.AlarmManagerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import java.util.*
 
@@ -29,7 +31,9 @@ class MisMedicamentosActivity : AppCompatActivity() {
     private val REQUEST_SCHEDULE_EXACT_ALARM_PERMISSION = 123
 
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-    private val medicationRef = database.getReference("medicamentos")
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private lateinit var currentUser: FirebaseUser
+    private lateinit var userMedicationRef: DatabaseReference
     private lateinit var medicamentoAdapter: MedicamentoAdapter
     private lateinit var medicamentoList: MutableList<Medicamento>
 
@@ -44,36 +48,32 @@ class MisMedicamentosActivity : AppCompatActivity() {
         medicamentoAdapter = MedicamentoAdapter(medicamentoList)
 
         val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
-        val medicamentoList = mutableListOf<Medicamento>()
 
+        // Obtener el usuario actual
+        currentUser = auth.currentUser!!
+
+        // Configurar la referencia de Firebase para los medicamentos del usuario actual
+        userMedicationRef = database.getReference("usuarios_medicamentos/${currentUser.uid}/medicamentos")
 
         val recyclerView: RecyclerView = findViewById(R.id.medicamentoRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = medicamentoAdapter
 
-
-
         addMedicationButton.setOnClickListener {
-            val medicationName = medicationNameEditText.text.toString()
+            val medicationName = medicationNameEditText.text.toString().trim()
             val selectedHour = timePicker.hour
             val selectedMinute = timePicker.minute
 
-            // Programar notificación y guardar medicamento en Firebase
-            scheduleNotification(alarmManager, medicationName, selectedHour, selectedMinute)
-        }
-
-
-        // Configurar el canal de notificación si se ejecuta en Android Oreo (o superior)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                "medication_channel",
-                "Medication Channel",
-                NotificationManager.IMPORTANCE_HIGH
-            )
-            val notificationManager = getSystemService(NotificationManager::class.java)
-            notificationManager.createNotificationChannel(channel)
+            // Verificar si el nombre del medicamento es válido
+            if (medicationName.isNotEmpty()) {
+                // Programar notificación y guardar medicamento en Firebase
+                scheduleNotification(alarmManager, medicationName, selectedHour, selectedMinute)
+            } else {
+                Toast.makeText(this, "Ingresa un nombre de medicamento válido", Toast.LENGTH_SHORT).show()
+            }
         }
     }
+
     fun verListaMedicamentos(view: View) {
         val intent = Intent(this, ListaMedicamentosActivity::class.java)
         startActivity(intent)
@@ -110,8 +110,8 @@ class MisMedicamentosActivity : AppCompatActivity() {
         )
 
         // Guardar el medicamento en Firebase
-        val medicamento = Medicamento(medicationName, "$selectedHour:$selectedMinute")
-        medicationRef.push().setValue(medicamento)
+        val newMedicamento = Medicamento(medicationName, "$selectedHour:$selectedMinute")
+        userMedicationRef.push().setValue(newMedicamento)
         medicamentoAdapter.notifyDataSetChanged()
 
         Toast.makeText(this, "Notificación programada", Toast.LENGTH_SHORT).show()

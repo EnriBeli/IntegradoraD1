@@ -26,6 +26,8 @@
         android:src="@drawable/google"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" /> <!-- Reemplaza "tu_imagen" con el nombre de tu imagen -->
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" /> <!-- Reemplaza "tu_imagen" con el nombre de tu imagen -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

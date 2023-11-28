@@ -10,11 +10,13 @@
     tools:context=".MisMedicamentosActivity">
 
     <EditText
+        android:layout_marginTop="15dp"
         android:id="@+id/medicationNameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nombre del Medicamento"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:textStyle="bold"/>
 
     <TimePicker
         android:id="@+id/timePicker"
@@ -28,7 +30,7 @@
         android:layout_width="391dp"
         android:layout_height="45dp"
         android:text="Agregar Medicamento y Notificación"
-        android:background="@color/colorVerdeTurquesa"/>
+        android:backgroundTint="#03A9F4"/>
 
     <!-- Agrega el RecyclerView para mostrar la lista de medicamentos -->
 
@@ -39,7 +41,7 @@
         android:layout_height="wrap_content"
         android:onClick="verListaMedicamentos"
         android:text="Ver Lista de Medicamentos"
-        android:background="@color/colorVerdeTurquesa"/>
+        android:backgroundTint="#03A9F4"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/medicamentoRecyclerView"

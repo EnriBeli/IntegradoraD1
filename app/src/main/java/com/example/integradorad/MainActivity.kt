@@ -1,5 +1,6 @@
 package com.example.integradorad
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
@@ -98,10 +99,6 @@ class MainActivity : AppCompatActivity() {
             this.startActivity(intent)
         }*/
 
-        binding.signOutImageView.setOnClickListener {
-            signOut()
-            finish()
-        }
 
         binding.MiMedicoButton01.setOnClickListener {
             val intent = Intent(this, MiMedico::class.java)
@@ -133,17 +130,47 @@ class MainActivity : AppCompatActivity() {
             this.startActivity(intent)
         }
 
+        binding.signOutImageView.setOnClickListener {
+            showSignOutConfirmationDialog()
+        }
+
+
     }
+
+    private fun showSignOutConfirmationDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Cerrar Sesión")
+        builder.setMessage("¿Estás seguro de que quieres cerrar sesión?")
+
+        builder.setPositiveButton("Sí") { dialog, which ->
+            // Cerrar sesión
+            signOut()
+            finish()
+            // Aquí puedes llamar a una función para enviar la notificación si es necesario
+        }
+
+        builder.setNegativeButton("No") { dialog, which ->
+            // No hacer nada o realizar alguna acción adicional si el usuario elige no cerrar sesión
+        }
+
+        builder.show()
+    }
+
+    private fun signOut() {
+        auth.signOut()
+        val intent = Intent(this, SignInActivity::class.java)
+        this.startActivity(intent)
+    }
+
+    // Aquí puedes agregar una función para enviar la notificación si es necesario
+    private fun sendLogoutNotification() {
+        // Código para enviar la notificación
+    }
+
 
     class Usuario {
         val nombre: String? = null
         val correo: String? = null
-    }
-
-    private  fun signOut(){
-        auth.signOut()
-        val intent = Intent(this, SignInActivity::class.java)
-        this.startActivity(intent)
     }
     /*
         private  fun updateProfile (name : String) {

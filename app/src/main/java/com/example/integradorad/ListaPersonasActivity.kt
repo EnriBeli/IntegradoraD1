@@ -23,9 +23,7 @@ class ListaPersonasActivity : AppCompatActivity() {
 
         listView = findViewById(R.id.listView) as? ListView
 
-        listaPersonas.add(Persona("Consultorio Médico Dr. Pérez", "https://maps.app.goo.gl/YM94hkSxAuCDBakq9"))
-        listaPersonas.add(Persona("Consultorio Médico Dr. Hernández", "https://maps.app.goo.gl/gLzSRPptrQgAPn3P9"))
-        listaPersonas.add(Persona("Consultorio Médico Dr. Gómez", "geo:17.202965,-93.010821"))
+        listaPersonas.add(Persona("Consultorio Médico Dr. Fergus Flórez", "https://maps.app.goo.gl/gLzSRPptrQgAPn3P9"))
 
         if (listView != null) {
             val adapter = PersonaAdapter(this, listaPersonas)

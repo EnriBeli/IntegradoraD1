@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class MedicamentoAdapter(private val medicamentos: List<Medicamento>) :
+class MedicamentoAdapter(private val medicamentos: List<Medicamento>,) :
     RecyclerView.Adapter<MedicamentoAdapter.MedicamentoViewHolder>() {
 
     inner class MedicamentoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -22,8 +22,8 @@ class MedicamentoAdapter(private val medicamentos: List<Medicamento>) :
 
     override fun onBindViewHolder(holder: MedicamentoViewHolder, position: Int) {
         val medicamento = medicamentos[position]
-        holder.medicationNameTextView.text = medicamento.nombre
-        holder.medicationTimeTextView.text = medicamento.hora
+        holder.medicationNameTextView.text = "Medicamento:  "+medicamento.nombre
+        holder.medicationTimeTextView.text = "Hora: "+medicamento.hora
     }
 
     override fun getItemCount(): Int {

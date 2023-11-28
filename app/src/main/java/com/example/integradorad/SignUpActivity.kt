@@ -52,6 +52,17 @@ class SignUpActivity : AppCompatActivity() {
                 createAccount(mEmail, mPassword)
             }
 
+            val passwordConditionsTextView = binding.passwordConditionsTextView
+            if (mPassword.isEmpty() || !passwordRegex.matcher(mPassword).matches()) {
+                Toast.makeText(this, "La contraseña es débil.", Toast.LENGTH_SHORT).show()
+
+                // Actualiza el texto del TextView de condiciones de la contraseña
+                passwordConditionsTextView.text = "La contraseña debe tener al menos 6 caracteres entre numeros, letras, incluyendo al menos un carácter especial (-@#$%^&+=)"
+            } else {
+                // Limpia el texto del TextView si la contraseña es válida
+                passwordConditionsTextView.text = ""
+            }
+
         }
 
         binding.SesionInico.setOnClickListener {
